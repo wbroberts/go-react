@@ -74,9 +74,10 @@ func createComponent(data *Component, wg *sync.WaitGroup) {
 
 	t, _ := template.New("component").Parse(string(templates.Component()))
 	t.Execute(f, &data)
-	wg.Done()
 
 	fmt.Println(green("created"), filename)
+
+	wg.Done()
 }
 
 func createTest(data *Component, wg *sync.WaitGroup) {
@@ -86,9 +87,10 @@ func createTest(data *Component, wg *sync.WaitGroup) {
 
 	t, _ := template.New("test").Parse(string(templates.ComponentTest()))
 	t.Execute(f, &data)
-	wg.Done()
 
 	fmt.Println(green("created"), filename)
+
+	wg.Done()
 }
 
 func createFile(dir, filename string) *os.File {
