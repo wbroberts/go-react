@@ -50,11 +50,11 @@ import { screen, render } from '@testing-library/react';
 import { Example } from './Example.component';
 
 describe('Example', () => {
-	it('renders', () => {
-		render(<Example />);
-
-		expect(screen.getByText(/Example renders/)).toBeDefined();
-	});
+  it('renders', () => {
+    render(<Example />);
+  
+    expect(screen.getByText(/Example renders/)).toBeDefined();
+  });
 });
 ```
 
