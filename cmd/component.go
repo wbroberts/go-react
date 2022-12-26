@@ -15,9 +15,9 @@ import (
 )
 
 type Component struct {
-  Name string
+	Name  string
 	Props bool
-	Dir string
+	Dir   string
 }
 
 type ComponentConfig struct {
@@ -28,7 +28,7 @@ type ComponentConfig struct {
 var componentCmd = &cobra.Command{
 	Use:   "component",
 	Short: "Creates a React component and test",
-	Args: cobra.MinimumNArgs(1),
+	Args:  cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		name := args[0]
 		withProps, _ := cmd.Flags().GetBool("props")
@@ -36,15 +36,15 @@ var componentCmd = &cobra.Command{
 		skipTests, _ := cmd.Flags().GetBool("skip-tests")
 		wd, _ := os.Getwd()
 		checkComponentsDir(wd, path)
-		
+
 		data := Component{
-			Name: name,
+			Name:  name,
 			Props: withProps,
-			Dir: 	strings.Join([]string{wd, path}, "/"),
+			Dir:   strings.Join([]string{wd, path}, "/"),
 		}
 
-		wg := new(sync.WaitGroup);
-		
+		wg := new(sync.WaitGroup)
+
 		routines := 2
 
 		if skipTests {
@@ -94,7 +94,7 @@ func createTest(data *Component, wg *sync.WaitGroup) {
 func createFile(dir, filename string) *os.File {
 	filepath := strings.Join([]string{dir, filename}, "/")
 	file, err := os.Create(filepath)
-		
+
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -114,8 +114,8 @@ func checkComponentsDir(dir string, path string) {
 	}
 }
 
-var ( 
-	defaultDir = "components"
+var (
+	defaultDir   = "components"
 	defaultProps = false
 )
 

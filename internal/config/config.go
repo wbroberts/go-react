@@ -8,7 +8,7 @@ import (
 
 type OptionsConfig struct {
 	Component struct {
-		Dir string
+		Dir   string
 		Props bool
 	}
 }
@@ -18,7 +18,7 @@ func GetConfig() OptionsConfig {
 
 	viper.AddConfigPath(".")
 	viper.SetConfigName("make-react-file")
-	
+
 	if err := viper.ReadInConfig(); err != nil {
 		log.Println("No config file found")
 	}
