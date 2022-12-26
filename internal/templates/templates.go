@@ -13,7 +13,7 @@ export const {{ .Name }}: React.ComponentType<{{ .Name }}Props> = ({}) => {
 export const {{ .Name }} = () => {
 	return <div>{{ .Name }} renders</div>;
 }
-{{ end }}
+{{ end -}}
 `)
 }
 
@@ -21,14 +21,14 @@ func ComponentTest() []byte {
 	return []byte(
 		`import { screen, render } from '@testing-library/react';
 
-import { {{ .Name }} } from './{{ .Name }}.component'
+import { {{ .Name }} } from './{{ .Name }}.component';
 
 describe('{{ .Name }}', () => {
 	it('renders', () => {
-		render(<{{ .Name }} />)
+		render(<{{ .Name }} />);
 
 		expect(screen.getByText(/{{ .Name }} renders/)).toBeDefined();
-	})
-})
+	});
+});
 `)
 }
