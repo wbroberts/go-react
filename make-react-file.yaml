@@ -1,0 +1,3 @@
+component:
+  dir: src/components
+  props: true
