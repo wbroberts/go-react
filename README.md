@@ -4,7 +4,9 @@ Wanted to learn Go so started with a simple CLI to generate react files to reduc
 
 ## Install
 
-`go install github.com/wbroberts/mrf`
+```bash
+go install github.com/wbroberts/mrf
+```
 
 ## Use
 
@@ -14,7 +16,9 @@ Wanted to learn Go so started with a simple CLI to generate react files to reduc
 
 Creates a component and component test file.
 
-`mrf component <ComponentName>`
+```base
+mrf component <ComponentName>
+```
 
 Options:
 
@@ -24,21 +28,23 @@ Options:
 
 ### Example:
 
-`mrf component Example`
+```bash
+mrf component Example
+```
 
-- Component `Example.component.tsx`
+- Component `./components/Example.component.tsx`
 
-```tsx
+```jsx
 import React from 'react';
 
 export const Example = () => {
-	return <div>Example renders</div>;
+  return <div>Example renders</div>;
 }
 ```
 
-- Component test `Example.component.test.tsx`
+- Component test `./components/Example.component.test.tsx`
 
-```tsx
+```jsx
 import { screen, render } from '@testing-library/react';
 
 import { Example } from './Example.component';
