@@ -1,4 +1,4 @@
-module github.com/wbroberts/mrf
+module github.com/wbroberts/go-react
 
 go 1.19
 

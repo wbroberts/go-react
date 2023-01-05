@@ -5,7 +5,7 @@ Wanted to learn Go so started with a simple CLI to generate react files to reduc
 ## Install
 
 ```bash
-go install github.com/wbroberts/mrf
+go install github.com/wbroberts/go-react
 ```
 
 ## Use

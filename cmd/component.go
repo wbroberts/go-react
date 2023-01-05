@@ -10,8 +10,8 @@ import (
 
 	"github.com/fatih/color"
 	"github.com/spf13/cobra"
-	"github.com/wbroberts/mrf/internal/config"
-	"github.com/wbroberts/mrf/internal/templates"
+	"github.com/wbroberts/go-react/internal/config"
+	"github.com/wbroberts/go-react/internal/templates"
 )
 
 type Component struct {
