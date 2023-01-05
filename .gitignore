@@ -2,4 +2,4 @@ bin/go-react
 
 src/
 
-make-react-file.yaml
+go-react.yaml

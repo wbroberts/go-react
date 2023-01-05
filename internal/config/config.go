@@ -1,8 +1,6 @@
 package config
 
 import (
-	"log"
-
 	"github.com/spf13/viper"
 )
 
@@ -14,16 +12,16 @@ type OptionsConfig struct {
 }
 
 func GetConfig() OptionsConfig {
-	var MkOptionsConfig OptionsConfig
+	var oc OptionsConfig
 
 	viper.AddConfigPath(".")
-	viper.SetConfigName("make-react-file")
+	viper.SetConfigName("go-react")
 
 	if err := viper.ReadInConfig(); err != nil {
-		log.Println("No config file found")
+		return oc
 	}
 
-	viper.Unmarshal(&MkOptionsConfig)
+	viper.Unmarshal(&oc)
 
-	return MkOptionsConfig
+	return oc
 }
