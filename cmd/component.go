@@ -35,20 +35,22 @@ var componentCmd = &cobra.Command{
 		path, _ := cmd.Flags().GetString("dir")
 		skipTests, _ := cmd.Flags().GetBool("skip-tests")
 		wd, _ := os.Getwd()
-		checkComponentsDir(wd, path)
+		dir := strings.Join([]string{wd, path}, "/")
+
+		checkDir(dir)
 
 		data := Component{
 			Name:  name,
 			Props: withProps,
-			Dir:   strings.Join([]string{wd, path}, "/"),
+			Dir:   dir,
 		}
 
 		wg := new(sync.WaitGroup)
 
-		routines := 2
+		routines := 1
 
-		if skipTests {
-			routines = 1
+		if !skipTests {
+			routines = 2
 		}
 
 		wg.Add(routines)
@@ -63,17 +65,21 @@ var componentCmd = &cobra.Command{
 	},
 }
 
-func green(t string) string {
-	return color.New(color.FgGreen).SprintFunc()(t)
+func checkDir(d string) {
+	if _, err := os.Stat(d); err != nil {
+		if os.IsNotExist(err) {
+			os.MkdirAll(d, os.ModePerm)
+		} else {
+			log.Fatal(err)
+		}
+	}
 }
 
 func createComponent(data *Component, wg *sync.WaitGroup) {
 	filename := data.Name + ".component.tsx"
-	f := createFile(data.Dir, filename)
-	defer f.Close()
-
+	filepath := strings.Join([]string{data.Dir, filename}, "/")
 	t, _ := template.New("component").Parse(string(templates.Component()))
-	t.Execute(f, &data)
+	createFile(data, filepath, t)
 
 	fmt.Println(green("created"), filename)
 
@@ -82,38 +88,29 @@ func createComponent(data *Component, wg *sync.WaitGroup) {
 
 func createTest(data *Component, wg *sync.WaitGroup) {
 	filename := data.Name + ".component.test.tsx"
-	f := createFile(data.Dir, filename)
-	defer f.Close()
-
+	filepath := strings.Join([]string{data.Dir, filename}, "/")
 	t, _ := template.New("test").Parse(string(templates.ComponentTest()))
-	t.Execute(f, &data)
 
+	createFile(data, filepath, t)
 	fmt.Println(green("created"), filename)
 
 	wg.Done()
 }
 
-func createFile(dir, filename string) *os.File {
-	filepath := strings.Join([]string{dir, filename}, "/")
-	file, err := os.Create(filepath)
+func createFile(data *Component, p string, t *template.Template) {
+	f, err := os.Create(p)
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	return file
+	defer f.Close()
+
+	t.Execute(f, data)
 }
 
-func checkComponentsDir(dir string, path string) {
-	dirPath := strings.Join([]string{dir, path}, "/")
-
-	if _, err := os.Stat(dirPath); err != nil {
-		if os.IsNotExist(err) {
-			os.MkdirAll(dirPath, os.ModePerm)
-		} else {
-			log.Fatal(err)
-		}
-	}
+func green(t string) string {
+	return color.New(color.FgGreen).SprintFunc()(t)
 }
 
 var (
