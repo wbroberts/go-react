@@ -62,7 +62,7 @@ describe('Example', () => {
 
 Can add a config file to set default flags when running commands.
 
-`touch make-react-file.yaml`
+`touch go-react.yaml`
 
 ```yaml
 # All values are optional
