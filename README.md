@@ -1,6 +1,6 @@
-# Make React File
+# Go React
 
-Wanted to learn Go so started with a simple CLI to generate react files to reduce the boilerplate.
+Wanted to learn Go so started with a simple CLI to can create the boilerplate for files.
 
 ## Install
 
@@ -10,14 +10,14 @@ go install github.com/wbroberts/go-react
 
 ## Use
 
-`mrf`
+`go-react`
 
 ## Component
 
 Creates a component and component test file.
 
 ```base
-mrf component <ComponentName>
+go-react component <ComponentName>
 ```
 
 Options:
@@ -26,10 +26,10 @@ Options:
 - `--skip-tests` skips adding the test file
 - `--dir` or `-d` sets the path for the directory the component should be added to. Will create the directory if it does not exist yet
 
-### Example:
+### Example
 
 ```bash
-mrf component Example
+go-react component Example
 ```
 
 - Component `./components/Example.component.tsx`
