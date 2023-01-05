@@ -5,7 +5,7 @@ Wanted to learn Go so started with a simple CLI to can create the boilerplate fo
 ## Install
 
 ```bash
-go install github.com/wbroberts/go-react
+go install github.com/wbroberts/go-react@latest
 ```
 
 ## Use
